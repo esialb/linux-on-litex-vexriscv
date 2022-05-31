@@ -1,0 +1,10 @@
+#!/bin/bash
+/bin/mkdir /sd
+/bin/mkdir /sd/old_root
+/bin/mount /dev/mmcblk0p2 /sd
+/bin/mount -t bind /dev /sd/dev
+/bin/mount -t bind /proc /sd/proc
+cd /sd
+/sbin/pivot_root . old_root
+/bin/umount old_root
+
