@@ -2,9 +2,15 @@
 mount -t sysfs none /sys
 mount -t proc none /proc
 mount -t devtmpfs none /dev
-mkdir -p /sd
-mount /dev/mmcblk0p2 /sd
-cd /sd
+mkdir -p /mnt/rootfs_readonly
+mkdir -p /mnt/rootfs_persistent
+mount /dev/mmcblk0p2 /mnt/rootfs_readonly
+mount /dev/mmcblk0p3 /mnt/rootfs_persistent
+mkdir -p /mnt/overlay
+mkdir -p /mnt/rootfs_persistent/upper
+mkdir -p /mnt/rootfs_persistent/work
+mount -t overlay -o lowerdir=/mnt/rootfs_readonly,upperdir=/mnt/rootfs_persistent/upper,workdir=/mnt/rootfs_persistent/work none /mnt/overlay
+cd /mnt/overlay
 mount -o bind /sys sys
 mount -o bind /dev dev
 exec switch_root . /bin/busybox init

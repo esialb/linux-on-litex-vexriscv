@@ -428,8 +428,6 @@ class OrangeCrab(Board):
             # Storage
             "spisdcard",
             "spi-internal",
-            "spiflash4x",
-            "usb",
         })
 
 # Butterstick support ------------------------------------------------------------------------------
