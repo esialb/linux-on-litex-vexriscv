@@ -1,0 +1,13 @@
+#!/bin/sh
+mount -t sysfs none /sys
+mount -t proc none /proc
+mount -t devtmpfs none /dev
+mkdir -p /sd
+mount /dev/mmcblk0p2 /sd
+cd /sd
+mount -o bind /sys sys
+mount -o bind /dev dev
+exec switch_root . /bin/busybox init
+
+
+
